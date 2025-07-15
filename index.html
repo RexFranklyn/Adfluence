@@ -1,0 +1,1984 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Adfluence | Social Media Campaign Platform</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        :root {
+            --primary: #4361ee;
+            --primary-dark: #3a56d4;
+            --secondary: #3f37c9;
+            --accent: #4895ef;
+            --light: #f8f9fa;
+            --dark: #212529;
+            --gray: #6c757d;
+            --light-gray: #e9ecef;
+            --success: #4bb543;
+            --danger: #ff3333;
+            --warning: #ffc107;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            background-color: var(--light);
+            color: var(--dark);
+            line-height: 1.6;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: white;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .navbar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: var(--primary);
+            text-decoration: none;
+        }
+
+        .logo i {
+            font-size: 1.8rem;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: var(--dark);
+            font-weight: 500;
+            transition: color 0.3s ease;
+            position: relative;
+        }
+
+        .nav-links a:hover {
+            color: var(--primary);
+        }
+
+        .nav-links a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 0;
+            background-color: var(--primary);
+            transition: width 0.3s ease;
+        }
+
+        .nav-links a:hover::after {
+            width: 100%;
+        }
+
+        .auth-buttons {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .btn {
+            padding: 0.6rem 1.2rem;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            border: none;
+            font-size: 0.9rem;
+        }
+
+        .btn-primary {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background-color: var(--primary-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
+        }
+
+        .btn-outline {
+            background-color: transparent;
+            border: 1px solid var(--primary);
+            color: var(--primary);
+        }
+
+        .btn-outline:hover {
+            background-color: var(--primary);
+            color: white;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(67, 97, 238, 0.2);
+        }
+
+        .mobile-menu-btn {
+            display: none;
+            background: none;
+            border: none;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--dark);
+        }
+
+        /* Hero Section */
+        .hero {
+            padding: 5rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, #f5f7ff 0%, #e8ecff 100%);
+        }
+
+        .hero h1 {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .hero p {
+            font-size: 1.2rem;
+            color: var(--gray);
+            max-width: 700px;
+            margin: 0 auto 2rem;
+        }
+
+        .hero-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin-bottom: 3rem;
+        }
+
+        .platform-icons {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .platform-icon {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+            transition: transform 0.3s ease;
+        }
+
+        .platform-icon:hover {
+            transform: translateY(-5px);
+        }
+
+        .platform-icon i {
+            font-size: 2.5rem;
+            color: var(--primary);
+            background-color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        .platform-icon span {
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        /* Features Section */
+        .features {
+            padding: 5rem 5%;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            text-align: center;
+            margin-bottom: 3rem;
+        }
+
+        .section-title h2 {
+            font-size: 2.2rem;
+            color: var(--dark);
+            margin-bottom: 1rem;
+        }
+
+        .section-title p {
+            color: var(--gray);
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .feature-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 2rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .feature-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.1);
+        }
+
+        .feature-card i {
+            font-size: 2rem;
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            background-color: var(--light-gray);
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .feature-card h3 {
+            font-size: 1.3rem;
+            margin-bottom: 1rem;
+            color: var(--dark);
+        }
+
+        .feature-card p {
+            color: var(--gray);
+        }
+
+        /* Niche System Section */
+        .niche-system {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+
+        .niche-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .niche-tabs {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            flex-wrap: wrap;
+        }
+
+        .niche-tab {
+            padding: 0.6rem 1.2rem;
+            background-color: var(--light-gray);
+            border-radius: 20px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+        }
+
+        .niche-tab:hover, .niche-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .niche-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .niche-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1.5rem;
+            transition: all 0.3s ease;
+            border: 1px solid var(--light-gray);
+            cursor: pointer;
+        }
+
+        .niche-card:hover {
+            border-color: var(--primary);
+            box-shadow: 0 5px 15px rgba(67, 97, 238, 0.1);
+        }
+
+        .niche-card h4 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .niche-card p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        .niche-card .stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 1rem;
+            font-size: 0.8rem;
+        }
+
+        .niche-card .stats span {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        /* How It Works */
+        .how-it-works {
+            padding: 5rem 5%;
+            background-color: var(--light);
+        }
+
+        .steps {
+            display: flex;
+            justify-content: space-between;
+            max-width: 1000px;
+            margin: 3rem auto 0;
+            position: relative;
+        }
+
+        .steps::before {
+            content: '';
+            position: absolute;
+            top: 40px;
+            left: 0;
+            right: 0;
+            height: 3px;
+            background-color: var(--light-gray);
+            z-index: 1;
+        }
+
+        .step {
+            text-align: center;
+            position: relative;
+            z-index: 2;
+            width: 25%;
+        }
+
+        .step-number {
+            width: 50px;
+            height: 50px;
+            background-color: var(--primary);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 1.2rem;
+            margin: 0 auto 1rem;
+        }
+
+        .step h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .step p {
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Campaign Showcase */
+        .campaign-showcase {
+            padding: 5rem 5%;
+            background-color: white;
+        }
+
+        .campaign-container {
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .campaign-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+            overflow-x: auto;
+            padding-bottom: 1rem;
+        }
+
+        .campaign-tab {
+            padding: 0.6rem 1.2rem;
+            background-color: var(--light-gray);
+            border-radius: 5px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 500;
+            white-space: nowrap;
+        }
+
+        .campaign-tab:hover, .campaign-tab.active {
+            background-color: var(--primary);
+            color: white;
+        }
+
+        .campaign-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 2rem;
+        }
+
+        .campaign-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            transition: transform 0.3s ease;
+        }
+
+        .campaign-card:hover {
+            transform: translateY(-5px);
+        }
+
+        .campaign-image {
+            height: 200px;
+            background-color: var(--light-gray);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .campaign-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.5s ease;
+        }
+
+        .campaign-card:hover .campaign-image img {
+            transform: scale(1.05);
+        }
+
+        .campaign-badge {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 600;
+        }
+
+        .campaign-content {
+            padding: 1.5rem;
+        }
+
+        .campaign-content h3 {
+            margin-bottom: 0.5rem;
+            color: var(--dark);
+        }
+
+        .campaign-content p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .campaign-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 1.5rem;
+        }
+
+        .campaign-stat {
+            text-align: center;
+        }
+
+        .campaign-stat h4 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .campaign-stat p {
+            font-size: 0.7rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .campaign-tags {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-bottom: 1.5rem;
+        }
+
+        .campaign-tag {
+            background-color: var(--light-gray);
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.7rem;
+            color: var(--dark);
+        }
+
+        .campaign-actions {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .btn-sm {
+            padding: 0.4rem 0.8rem;
+            font-size: 0.8rem;
+        }
+
+        /* CTA Section */
+        .cta {
+            padding: 5rem 5%;
+            text-align: center;
+            background: linear-gradient(135deg, var(--primary) 0%, var(--secondary) 100%);
+            color: white;
+        }
+
+        .cta h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .cta p {
+            max-width: 600px;
+            margin: 0 auto 2rem;
+            opacity: 0.9;
+        }
+
+        .cta-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+        }
+
+        .btn-white {
+            background-color: white;
+            color: var(--primary);
+        }
+
+        .btn-white:hover {
+            background-color: rgba(255, 255, 255, 0.9);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        .btn-transparent {
+            background-color: transparent;
+            border: 1px solid white;
+            color: white;
+        }
+
+        .btn-transparent:hover {
+            background-color: rgba(255, 255, 255, 0.1);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Footer */
+        footer {
+            background-color: var(--dark);
+            color: white;
+            padding: 4rem 5% 2rem;
+        }
+
+        .footer-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 2rem;
+        }
+
+        .footer-col h3 {
+            font-size: 1.2rem;
+            margin-bottom: 1.5rem;
+            position: relative;
+        }
+
+        .footer-col h3::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            bottom: -8px;
+            width: 40px;
+            height: 2px;
+            background-color: var(--primary);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--gray);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .footer-col ul li a:hover {
+            color: white;
+        }
+
+        .footer-col .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .footer-col .social-links a {
+            color: white;
+            background-color: rgba(255, 255, 255, 0.1);
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.3s ease;
+        }
+
+        .footer-col .social-links a:hover {
+            background-color: var(--primary);
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 3rem;
+            margin-top: 3rem;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            color: var(--gray);
+            font-size: 0.9rem;
+        }
+
+        /* Responsive Styles */
+        @media (max-width: 992px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+            
+            .steps {
+                flex-direction: column;
+                align-items: center;
+                gap: 3rem;
+            }
+            
+            .steps::before {
+                display: none;
+            }
+            
+            .step {
+                width: 100%;
+                max-width: 400px;
+            }
+            
+            .step-number {
+                margin-bottom: 1rem;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-links, .auth-buttons {
+                display: none;
+            }
+            
+            .mobile-menu-btn {
+                display: block;
+            }
+            
+            .hero h1 {
+                font-size: 2rem;
+            }
+            
+            .hero-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+            
+            .platform-icons {
+                gap: 1.5rem;
+            }
+            
+            .cta-buttons {
+                flex-direction: column;
+                align-items: center;
+            }
+        }
+
+        @media (max-width: 576px) {
+            .hero {
+                padding: 3rem 5%;
+            }
+            
+            .features, .niche-system, .how-it-works, .campaign-showcase, .cta {
+                padding: 3rem 5%;
+            }
+            
+            .section-title h2 {
+                font-size: 1.8rem;
+            }
+            
+            .campaign-cards {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        /* Modal Styles */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.5);
+            z-index: 1000;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .modal-content {
+            background-color: white;
+            border-radius: 10px;
+            width: 90%;
+            max-width: 500px;
+            max-height: 90vh;
+            overflow-y: auto;
+            padding: 2rem;
+            position: relative;
+            animation: modalFadeIn 0.3s ease;
+        }
+
+        @keyframes modalFadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(-20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .close-modal {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            font-size: 1.5rem;
+            cursor: pointer;
+            color: var(--gray);
+            transition: color 0.3s ease;
+        }
+
+        .close-modal:hover {
+            color: var(--dark);
+        }
+
+        .modal h2 {
+            margin-bottom: 1.5rem;
+            color: var(--dark);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            font-weight: 500;
+            color: var(--dark);
+        }
+
+        .form-group input, .form-group select, .form-group textarea {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--light-gray);
+            border-radius: 5px;
+            font-size: 1rem;
+            transition: border-color 0.3s ease;
+        }
+
+        .form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+            border-color: var(--primary);
+            outline: none;
+        }
+
+        .form-group textarea {
+            min-height: 100px;
+            resize: vertical;
+        }
+
+        .form-actions {
+            display: flex;
+            justify-content: flex-end;
+            gap: 1rem;
+            margin-top: 2rem;
+        }
+
+        /* Dashboard Styles (Preview) */
+        .dashboard {
+            display: none;
+            padding: 2rem 5%;
+            max-width: 1600px;
+            margin: 0 auto;
+        }
+
+        .dashboard-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 2rem;
+        }
+
+        .dashboard-title h1 {
+            font-size: 1.8rem;
+            color: var(--dark);
+        }
+
+        .dashboard-stats {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .stat-card {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card h3 {
+            font-size: 0.9rem;
+            color: var(--gray);
+            margin-bottom: 0.5rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        .stat-card p {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--dark);
+        }
+
+        .stat-card .trend {
+            display: flex;
+            align-items: center;
+            font-size: 0.8rem;
+            margin-top: 0.5rem;
+        }
+
+        .trend.up {
+            color: var(--success);
+        }
+
+        .trend.down {
+            color: var(--danger);
+        }
+
+        .dashboard-sections {
+            display: grid;
+            grid-template-columns: 250px 1fr;
+            gap: 2rem;
+        }
+
+        .dashboard-sidebar {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+            height: fit-content;
+        }
+
+        .sidebar-menu {
+            list-style: none;
+        }
+
+        .sidebar-menu li {
+            margin-bottom: 0.5rem;
+        }
+
+        .sidebar-menu a {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            padding: 0.8rem;
+            border-radius: 5px;
+            text-decoration: none;
+            color: var(--dark);
+            transition: all 0.3s ease;
+        }
+
+        .sidebar-menu a:hover, .sidebar-menu a.active {
+            background-color: var(--light-gray);
+            color: var(--primary);
+        }
+
+        .sidebar-menu a i {
+            width: 20px;
+            text-align: center;
+        }
+
+        .dashboard-main {
+            background-color: white;
+            border-radius: 10px;
+            padding: 1.5rem;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.05);
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 1.3rem;
+            color: var(--dark);
+        }
+
+        .campaign-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+
+        .campaign-table th, .campaign-table td {
+            padding: 1rem;
+            text-align: left;
+            border-bottom: 1px solid var(--light-gray);
+        }
+
+        .campaign-table th {
+            font-weight: 600;
+            color: var(--gray);
+            text-transform: uppercase;
+            font-size: 0.8rem;
+            letter-spacing: 1px;
+        }
+
+        .campaign-table td {
+            color: var(--dark);
+            font-size: 0.9rem;
+        }
+
+        .status {
+            display: inline-block;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            font-weight: 500;
+        }
+
+        .status.active {
+            background-color: rgba(75, 181, 67, 0.1);
+            color: var(--success);
+        }
+
+        .status.pending {
+            background-color: rgba(255, 193, 7, 0.1);
+            color: var(--warning);
+        }
+
+        .status.completed {
+            background-color: rgba(108, 117, 125, 0.1);
+            color: var(--gray);
+        }
+
+        .action-btn {
+            background: none;
+            border: none;
+            cursor: pointer;
+            color: var(--primary);
+            font-size: 1rem;
+            transition: color 0.3s ease;
+        }
+
+        .action-btn:hover {
+            color: var(--primary-dark);
+        }
+
+        /* Influencer Profile */
+        .influencer-profile {
+            display: flex;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .profile-image {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid var(--light-gray);
+        }
+
+        .profile-info h2 {
+            font-size: 1.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .profile-info p {
+            color: var(--gray);
+            margin-bottom: 1rem;
+        }
+
+        .profile-stats {
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .profile-stat {
+            text-align: center;
+        }
+
+        .profile-stat h3 {
+            font-size: 1.2rem;
+            color: var(--primary);
+            margin-bottom: 0.2rem;
+        }
+
+        .profile-stat p {
+            font-size: 0.8rem;
+            color: var(--gray);
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* Platform Connections */
+        .platform-connections {
+            margin-bottom: 2rem;
+        }
+
+        .platform-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+            gap: 1rem;
+        }
+
+        .platform-card {
+            background-color: var(--light);
+            border-radius: 10px;
+            padding: 1rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .platform-card:hover {
+            background-color: var(--light-gray);
+        }
+
+        .platform-icon-small {
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background-color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+        }
+
+        .platform-info h4 {
+            font-size: 0.9rem;
+            margin-bottom: 0.2rem;
+        }
+
+        .platform-info p {
+            font-size: 0.8rem;
+            color: var(--gray);
+        }
+
+        .connected {
+            color: var(--success);
+        }
+
+        .not-connected {
+            color: var(--danger);
+        }
+
+        /* Niche Selection */
+        .niche-selection {
+            margin-bottom: 2rem;
+        }
+
+        .selected-niches {
+            display: flex;
+            gap: 0.5rem;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+        }
+
+        .selected-niche {
+            background-color: var(--primary);
+            color: white;
+            padding: 0.3rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.8rem;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .remove-niche {
+            background: none;
+            border: none;
+            color: white;
+            cursor: pointer;
+            font-size: 0.8rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Header -->
+    <header>
+        <div class="navbar">
+            <a href="#" class="logo">
+                <i class="fas fa-bullhorn"></i>
+                <span>Adfluence</span>
+            </a>
+            <div class="nav-links">
+                <a href="#features">Features</a>
+                <a href="#niches">Niche System</a>
+                <a href="#how-it-works">How It Works</a>
+                <a href="#campaigns">Campaigns</a>
+                <a href="#pricing">Pricing</a>
+            </div>
+            <div class="auth-buttons">
+                <button class="btn btn-outline" id="login-btn">Login</button>
+                <button class="btn btn-primary" id="signup-btn">Sign Up</button>
+            </div>
+            <button class="mobile-menu-btn">
+                <i class="fas fa-bars"></i>
+            </button>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Run Ad Campaigns Across All Social Platforms</h1>
+        <p>Connect with influencers in your niche and launch campaigns on Instagram, TikTok, Facebook, Twitter, WhatsApp and more from one centralized platform.</p>
+        <div class="hero-buttons">
+            <button class="btn btn-primary" id="brand-signup">I'm a Brand</button>
+            <button class="btn btn-outline" id="influencer-signup">I'm an Influencer</button>
+        </div>
+        <div class="platform-icons">
+            <div class="platform-icon">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </div>
+            <div class="platform-icon">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </div>
+            <div class="platform-icon">
+                <i class="fab fa-facebook"></i>
+                <span>Facebook</span>
+            </div>
+            <div class="platform-icon">
+                <i class="fab fa-twitter"></i>
+                <span>Twitter</span>
+            </div>
+            <div class="platform-icon">
+                <i class="fab fa-whatsapp"></i>
+                <span>WhatsApp</span>
+            </div>
+            <div class="platform-icon">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Features Section -->
+    <section class="features" id="features">
+        <div class="section-title">
+            <h2>Powerful Features for Brands & Influencers</h2>
+            <p>Our platform provides everything you need to run successful social media campaigns</p>
+        </div>
+        <div class="features-grid">
+            <div class="feature-card">
+                <i class="fas fa-search-dollar"></i>
+                <h3>Influencer Discovery</h3>
+                <p>Find the perfect influencers for your campaign using our advanced filters and niche categories.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-project-diagram"></i>
+                <h3>Multi-Platform Campaigns</h3>
+                <p>Launch and manage campaigns across multiple social platforms from one dashboard.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-chart-line"></i>
+                <h3>Performance Analytics</h3>
+                <p>Track campaign performance in real-time with detailed analytics and reporting.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-money-bill-wave"></i>
+                <h3>Automated Payments</h3>
+                <p>Secure, automated payments for influencers upon campaign completion.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-tags"></i>
+                <h3>Niche Targeting</h3>
+                <p>Our comprehensive niche system ensures perfect matches between brands and influencers.</p>
+            </div>
+            <div class="feature-card">
+                <i class="fas fa-comments"></i>
+                <h3>Direct Messaging</h3>
+                <p>Communicate directly with influencers through our built-in messaging system.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Niche System Section -->
+    <section class="niche-system" id="niches">
+        <div class="niche-container">
+            <div class="section-title">
+                <h2>Our Comprehensive Niche System</h2>
+                <p>Influencers can select from hundreds of niche categories to find the perfect campaigns</p>
+            </div>
+            <div class="niche-tabs">
+                <div class="niche-tab active" data-category="all">All Niches</div>
+                <div class="niche-tab" data-category="lifestyle">Lifestyle</div>
+                <div class="niche-tab" data-category="fashion">Fashion</div>
+                <div class="niche-tab" data-category="beauty">Beauty</div>
+                <div class="niche-tab" data-category="fitness">Fitness</div>
+                <div class="niche-tab" data-category="food">Food</div>
+            </div>
+            <div class="niche-grid">
+                <div class="niche-card" data-category="lifestyle">
+                    <h4>Minimalist Lifestyle</h4>
+                    <p>Focusing on simple living and intentional consumption</p>
+                    <div class="stats">
+                        <span>2,341 Influencers</span>
+                        <span>548 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="fashion">
+                    <h4>Sustainable Fashion</h4>
+                    <p>Eco-friendly clothing and ethical fashion brands</p>
+                    <div class="stats">
+                        <span>1,892 Influencers</span>
+                        <span>327 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="beauty">
+                    <h4>Clean Beauty</h4>
+                    <p>Non-toxic, natural beauty products and routines</p>
+                    <div class="stats">
+                        <span>3,451 Influencers</span>
+                        <span>721 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="fitness">
+                    <h4>Home Workouts</h4>
+                    <p>Fitness routines and equipment for home exercise</p>
+                    <div class="stats">
+                        <span>2,876 Influencers</span>
+                        <span>612 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="food">
+                    <h4>Plant-Based Eating</h4>
+                    <p>Vegan and vegetarian recipes and products</p>
+                    <div class="stats">
+                        <span>1,543 Influencers</span>
+                        <span>289 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="lifestyle">
+                    <h4>Digital Nomad</h4>
+                    <p>Remote work, travel, and location-independent living</p>
+                    <div class="stats">
+                        <span>1,234 Influencers</span>
+                        <span>198 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="fashion">
+                    <h4>Streetwear</h4>
+                    <p>Urban fashion trends and street style</p>
+                    <div class="stats">
+                        <span>2,109 Influencers</span>
+                        <span>432 Active Campaigns</span>
+                    </div>
+                </div>
+                <div class="niche-card" data-category="beauty">
+                    <h4>Skincare Science</h4>
+                    <p>Dermatologist-approved skincare routines</p>
+                    <div class="stats">
+                        <span>1,765 Influencers</span>
+                        <span>387 Active Campaigns</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works" id="how-it-works">
+        <div class="section-title">
+            <h2>How Adfluence Works</h2>
+            <p>Simple steps to launch your campaign or start earning as an influencer</p>
+        </div>
+        <div class="steps">
+            <div class="step">
+                <div class="step-number">1</div>
+                <h3>Create Your Profile</h3>
+                <p>Brands set up their company profile, influencers create their media kit with niches and stats.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">2</div>
+                <h3>Find Matches</h3>
+                <p>Our algorithm suggests perfect matches based on niche, audience, and campaign requirements.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">3</div>
+                <h3>Launch Campaign</h3>
+                <p>Brands create campaigns with clear guidelines, budget, and timeline.</p>
+            </div>
+            <div class="step">
+                <div class="step-number">4</div>
+                <h3>Get Results</h3>
+                <p>Influencers complete campaigns, brands get content and analytics, everyone gets paid.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Campaign Showcase -->
+    <section class="campaign-showcase" id="campaigns">
+        <div class="campaign-container">
+            <div class="section-title">
+                <h2>Current Campaigns</h2>
+                <p>Browse active campaigns looking for influencers in your niche</p>
+            </div>
+            <div class="campaign-tabs">
+                <div class="campaign-tab active">All Campaigns</div>
+                <div class="campaign-tab">High Budget</div>
+                <div class="campaign-tab">New</div>
+                <div class="campaign-tab">Ending Soon</div>
+                <div class="campaign-tab">Instagram</div>
+                <div class="campaign-tab">TikTok</div>
+                <div class="campaign-tab">YouTube</div>
+            </div>
+            <div class="campaign-cards">
+                <div class="campaign-card">
+                    <div class="campaign-image">
+                        <img src="https://images.unsplash.com/photo-1498837167922-ddd27525d352?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Campaign">
+                        <div class="campaign-badge">$500-$2,000</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Organic Protein Powder Launch</h3>
+                        <p>Promote our new line of plant-based protein powders to fitness enthusiasts</p>
+                        <div class="campaign-stats">
+                            <div class="campaign-stat">
+                                <h4>32</h4>
+                                <p>Influencers</p>
+                            </div>
+                            <div class="campaign-stat">
+                                <h4>14</h4>
+                                <p>Days Left</p>
+                            </div>
+                            <div class="campaign-stat">
+                                <h4>5.2k</h4>
+                                <p>Applications</p>
+                            </div>
+                        </div>
+                        <div class="campaign-tags">
+                            <span class="campaign-tag">Fitness</span>
+                            <span class="campaign-tag">Health</span>
+                            <span class="campaign-tag">Instagram</span>
+                            <span class="campaign-tag">TikTok</span>
+                        </div>
+                        <div class="campaign-actions">
+                            <button class="btn btn-primary btn-sm">Apply Now</button>
+                            <button class="btn btn-outline btn-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-image">
+                        <img src="https://images.unsplash.com/photo-1551232864-3f0890e580d9?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Campaign">
+                        <div class="campaign-badge">$1,000-$5,000</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Sustainable Fashion Brand Awareness</h3>
+                        <p>Showcase our eco-friendly clothing line to conscious consumers</p>
+                        <div class="campaign-stats">
+                            <div class="campaign-stat">
+                                <h4>45</h4>
+                                <p>Influencers</p>
+                            </div>
+                            <div class="campaign-stat">
+                                <h4>21</h4>
+                                <p>Days Left</p>
+                            </div>
+                            <div class="campaign-stat">
+                                <h4>3.8k</h4>
+                                <p>Applications</p>
+                            </div>
+                        </div>
+                        <div class="campaign-tags">
+                            <span class="campaign-tag">Fashion</span>
+                            <span class="campaign-tag">Eco</span>
+                            <span class="campaign-tag">Instagram</span>
+                            <span class="campaign-tag">YouTube</span>
+                        </div>
+                        <div class="campaign-actions">
+                            <button class="btn btn-primary btn-sm">Apply Now</button>
+                            <button class="btn btn-outline btn-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="campaign-card">
+                    <div class="campaign-image">
+                        <img src="https://images.unsplash.com/photo-1570172619644-dfd03ed5d881?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Campaign">
+                        <div class="campaign-badge">$200-$800</div>
+                    </div>
+                    <div class="campaign-content">
+                        <h3>Skincare Routine Challenge</h3>
+                        <p>7-day skincare challenge featuring our new product line</p>
+                        <div class="campaign-stats">
+                            <div class="campaign-stat">
+                                <h4>28</h4>
+                                <p>Influencers</p>
+                            </div>
+                            <div class="campaign-stat">
+                                <h4>7</h4>
+                                <p>Days Left</p>
+                            </div>
+                            <div class="campaign-stat">
+                                <h4>6.5k</h4>
+                                <p>Applications</p>
+                            </div>
+                        </div>
+                        <div class="campaign-tags">
+                            <span class="campaign-tag">Beauty</span>
+                            <span class="campaign-tag">Skincare</span>
+                            <span class="campaign-tag">TikTok</span>
+                            <span class="campaign-tag">Instagram</span>
+                        </div>
+                        <div class="campaign-actions">
+                            <button class="btn btn-primary btn-sm">Apply Now</button>
+                            <button class="btn btn-outline btn-sm">View Details</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta">
+        <h2>Ready to Grow Your Brand or Monetize Your Influence?</h2>
+        <p>Join thousands of brands and influencers already using Adfluence to create successful partnerships.</p>
+        <div class="cta-buttons">
+            <button class="btn btn-white">Start as a Brand</button>
+            <button class="btn btn-transparent">Join as Influencer</button>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-col">
+                <h3>Adfluence</h3>
+                <p>The all-in-one platform for social media advertising campaigns and influencer partnerships.</p>
+                <div class="social-links">
+                    <a href="#"><i class="fab fa-facebook-f"></i></a>
+                    <a href="#"><i class="fab fa-twitter"></i></a>
+                    <a href="#"><i class="fab fa-instagram"></i></a>
+                    <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                </div>
+            </div>
+            <div class="footer-col">
+                <h3>For Brands</h3>
+                <ul>
+                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#">Pricing</a></li>
+                    <li><a href="#">Case Studies</a></li>
+                    <li><a href="#">Brand Resources</a></li>
+                    <li><a href="#">API Documentation</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>For Influencers</h3>
+                <ul>
+                    <li><a href="#">Getting Started</a></li>
+                    <li><a href="#">Earning Potential</a></li>
+                    <li><a href="#">Profile Tips</a></li>
+                    <li><a href="#">Community</a></li>
+                    <li><a href="#">Help Center</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h3>Company</h3>
+                <ul>
+                    <li><a href="#">About Us</a></li>
+                    <li><a href="#">Careers</a></li>
+                    <li><a href="#">Blog</a></li>
+                    <li><a href="#">Press</a></li>
+                    <li><a href="#">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="copyright">
+            <p>&copy; 2023 Adfluence. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+        </div>
+    </footer>
+
+    <!-- Login Modal -->
+    <div class="modal" id="login-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Login to Your Account</h2>
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="login-email">Email</label>
+                    <input type="email" id="login-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="login-password">Password</label>
+                    <input type="password" id="login-password" required>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">Don't have an account? <a href="#" id="switch-to-signup">Sign up</a></p>
+        </div>
+    </div>
+
+    <!-- Signup Modal -->
+    <div class="modal" id="signup-modal">
+        <div class="modal-content">
+            <span class="close-modal">&times;</span>
+            <h2>Create Your Account</h2>
+            <form id="signup-form">
+                <div class="form-group">
+                    <label for="signup-name">Full Name</label>
+                    <input type="text" id="signup-name" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-email">Email</label>
+                    <input type="email" id="signup-email" required>
+                </div>
+                <div class="form-group">
+                    <label for="signup-password">Password</label>
+                    <input type="password" id="signup-password" required>
+                </div>
+                <div class="form-group">
+                    <label for="account-type">I am a...</label>
+                    <select id="account-type" required>
+                        <option value="">Select account type</option>
+                        <option value="brand">Brand/Company</option>
+                        <option value="agency">Marketing Agency</option>
+                        <option value="influencer">Influencer/Creator</option>
+                    </select>
+                </div>
+                <div class="form-actions">
+                    <button type="button" class="btn btn-outline close-modal-btn">Cancel</button>
+                    <button type="submit" class="btn btn-primary">Create Account</button>
+                </div>
+            </form>
+            <p style="text-align: center; margin-top: 1rem;">Already have an account? <a href="#" id="switch-to-login">Login</a></p>
+        </div>
+    </div>
+
+    <!-- Influencer Dashboard Preview -->
+    <div class="dashboard" id="influencer-dashboard">
+        <div class="dashboard-header">
+            <div class="dashboard-title">
+                <h1>Influencer Dashboard</h1>
+            </div>
+            <div class="dashboard-actions">
+                <button class="btn btn-primary">Create Campaign</button>
+            </div>
+        </div>
+
+        <div class="dashboard-stats">
+            <div class="stat-card">
+                <h3>Earnings</h3>
+                <p>$2,450</p>
+                <div class="trend up">
+                    <i class="fas fa-arrow-up"></i> 12% from last month
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Active Campaigns</h3>
+                <p>4</p>
+                <div class="trend up">
+                    <i class="fas fa-arrow-up"></i> 2 new this week
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Applications</h3>
+                <p>12</p>
+                <div class="trend down">
+                    <i class="fas fa-arrow-down"></i> 3% from last week
+                </div>
+            </div>
+            <div class="stat-card">
+                <h3>Completion Rate</h3>
+                <p>98%</p>
+                <div class="trend up">
+                    <i class="fas fa-arrow-up"></i> 5% improvement
+                </div>
+            </div>
+        </div>
+
+        <div class="dashboard-sections">
+            <div class="dashboard-sidebar">
+                <ul class="sidebar-menu">
+                    <li><a href="#" class="active"><i class="fas fa-home"></i> Dashboard</a></li>
+                    <li><a href="#"><i class="fas fa-bullhorn"></i> Campaigns</a></li>
+                    <li><a href="#"><i class="fas fa-envelope"></i> Messages</a></li>
+                    <li><a href="#"><i class="fas fa-chart-bar"></i> Analytics</a></li>
+                    <li><a href="#"><i class="fas fa-wallet"></i> Earnings</a></li>
+                    <li><a href="#"><i class="fas fa-user"></i> Profile</a></li>
+                    <li><a href="#"><i class="fas fa-cog"></i> Settings</a></li>
+                </ul>
+            </div>
+            <div class="dashboard-main">
+                <div class="section-header">
+                    <h2>Active Campaigns</h2>
+                    <button class="btn btn-outline">View All</button>
+                </div>
+
+                <div class="influencer-profile">
+                    <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&auto=format&fit=crop&w=500&q=60" alt="Profile" class="profile-image">
+                    <div class="profile-info">
+                        <h2>Sarah Johnson</h2>
+                        <p>Lifestyle & Beauty Influencer | 125k Followers</p>
+                        <div class="profile-stats">
+                            <div class="profile-stat">
+                                <h3>4.8</h3>
+                                <p>Rating</p>
+                            </div>
+                            <div class="profile-stat">
+                                <h3>87</h3>
+                                <p>Campaigns</p>
+                            </div>
+                            <div class="profile-stat">
+                                <h3>98%</h3>
+                                <p>Completion</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="platform-connections">
+                    <div class="section-header">
+                        <h2>Platform Connections</h2>
+                    </div>
+                    <div class="platform-cards">
+                        <div class="platform-card">
+                            <div class="platform-icon-small" style="color: #E1306C;">
+                                <i class="fab fa-instagram"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h4>Instagram</h4>
+                                <p class="connected">Connected</p>
+                            </div>
+                        </div>
+                        <div class="platform-card">
+                            <div class="platform-icon-small" style="color: #000000;">
+                                <i class="fab fa-tiktok"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h4>TikTok</h4>
+                                <p class="connected">Connected</p>
+                            </div>
+                        </div>
+                        <div class="platform-card">
+                            <div class="platform-icon-small" style="color: #1DA1F2;">
+                                <i class="fab fa-twitter"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h4>Twitter</h4>
+                                <p class="not-connected">Not Connected</p>
+                            </div>
+                        </div>
+                        <div class="platform-card">
+                            <div class="platform-icon-small" style="color: #FF0000;">
+                                <i class="fab fa-youtube"></i>
+                            </div>
+                            <div class="platform-info">
+                                <h4>YouTube</h4>
+                                <p class="connected">Connected</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="niche-selection">
+                    <div class="section-header">
+                        <h2>Your Selected Niches</h2>
+                    </div>
+                    <p>These niches help brands find you for relevant campaigns. Update them to get better matches.</p>
+                    <div class="selected-niches">
+                        <div class="selected-niche">
+                            Beauty <button class="remove-niche">&times;</button>
+                        </div>
+                        <div class="selected-niche">
+                            Skincare <button class="remove-niche">&times;</button>
+                        </div>
+                        <div class="selected-niche">
+                            Lifestyle <button class="remove-niche">&times;</button>
+                        </div>
+                        <div class="selected-niche">
+                            Wellness <button class="remove-niche">&times;</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline" style="margin-top: 1rem;">Edit Niches</button>
+                </div>
+
+                <div class="section-header" style="margin-top: 2rem;">
+                    <h2>Recommended Campaigns</h2>
+                    <button class="btn btn-outline">View All</button>
+                </div>
+
+                <table class="campaign-table">
+                    <thead>
+                        <tr>
+                            <th>Campaign</th>
+                            <th>Brand</th>
+                            <th>Platform</th>
+                            <th>Budget</th>
+                            <th>Status</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td>Summer Skincare Routine</td>
+                            <td>Glow Beauty</td>
+                            <td>Instagram</td>
+                            <td>$800-$1,200</td>
+                            <td><span class="status active">Active</span></td>
+                            <td><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>Organic Haircare Launch</td>
+                            <td>Pure Hair</td>
+                            <td>TikTok</td>
+                            <td>$500-$900</td>
+                            <td><span class="status pending">Pending</span></td>
+                            <td><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>Wellness Retreat Promotion</td>
+                            <td>Serenity Getaways</td>
+                            <td>Instagram</td>
+                            <td>$1,200-$2,000</td>
+                            <td><span class="status active">Active</span></td>
+                            <td><button class="action-btn">View</button></td>
+                        </tr>
+                        <tr>
+                            <td>Yoga Apparel Showcase</td>
+                            <td>Zenith Active</td>
+                            <td>YouTube</td>
+                            <td>$1,500-$3,000</td>
+                            <td><span class="status completed">Completed</span></td>
+                            <td><button class="action-btn">View</button></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // DOM Elements
+        const loginBtn = document.getElementById('login-btn');
+        const signupBtn = document.getElementById('signup-btn');
+        const brandSignup = document.getElementById('brand-signup');
+        const influencerSignup = document.getElementById('influencer-signup');
+        const loginModal = document.getElementById('login-modal');
+        const signupModal = document.getElementById('signup-modal');
+        const closeModalBtns = document.querySelectorAll('.close-modal, .close-modal-btn');
+        const switchToLogin = document.getElementById('switch-to-login');
+        const switchToSignup = document.getElementById('switch-to-signup');
+        const loginForm = document.getElementById('login-form');
+        const signupForm = document.getElementById('signup-form');
+        const nicheTabs = document.querySelectorAll('.niche-tab');
+        const nicheCards = document.querySelectorAll('.niche-card');
+        const influencerDashboard = document.getElementById('influencer-dashboard');
+
+        // Show Login Modal
+        loginBtn.addEventListener('click', () => {
+            loginModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Show Signup Modal
+        signupBtn.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Brand Signup
+        brandSignup.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+            document.getElementById('account-type').value = 'brand';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Influencer Signup
+        influencerSignup.addEventListener('click', () => {
+            signupModal.style.display = 'flex';
+            document.getElementById('account-type').value = 'influencer';
+            document.body.style.overflow = 'hidden';
+        });
+
+        // Close Modals
+        closeModalBtns.forEach(btn => {
+            btn.addEventListener('click', () => {
+                loginModal.style.display = 'none';
+                signupModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            });
+        });
+
+        // Switch between Login and Signup
+        switchToLogin.addEventListener('click', (e) => {
+            e.preventDefault();
+            signupModal.style.display = 'none';
+            loginModal.style.display = 'flex';
+        });
+
+        switchToSignup.addEventListener('click', (e) => {
+            e.preventDefault();
+            loginModal.style.display = 'none';
+            signupModal.style.display = 'flex';
+        });
+
+        // Close modal when clicking outside
+        window.addEventListener('click', (e) => {
+            if (e.target === loginModal) {
+                loginModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+            if (e.target === signupModal) {
+                signupModal.style.display = 'none';
+                document.body.style.overflow = 'auto';
+            }
+        });
+
+        // Form Submissions
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            // In a real app, you would handle authentication here
+            alert('Login functionality would be implemented here');
+            loginModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Show dashboard preview (for demo purposes)
+            influencerDashboard.style.display = 'block';
+            window.scrollTo(0, 0);
+        });
+
+        signupForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const accountType = document.getElementById('account-type').value;
+            // In a real app, you would handle registration here
+            alert(`Account creation for ${accountType} would be implemented here`);
+            signupModal.style.display = 'none';
+            document.body.style.overflow = 'auto';
+            
+            // Show dashboard preview (for demo purposes)
+            if (accountType === 'influencer') {
+                influencerDashboard.style.display = 'block';
+                window.scrollTo(0, 0);
+            }
+        });
+
+        // Niche Filtering
+        nicheTabs.forEach(tab => {
+            tab.addEventListener('click', () => {
+                // Update active tab
+                nicheTabs.forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                
+                const category = tab.dataset.category;
+                
+                // Filter niche cards
+                nicheCards.forEach(card => {
+                    if (category === 'all' || card.dataset.category === category) {
+                        card.style.display = 'block';
+                    } else {
+                        card.style.display = 'none';
+                    }
+                });
+            });
+        });
+
+        // Mobile Menu Toggle (would be implemented fully in a real app)
+        document.querySelector('.mobile-menu-btn').addEventListener('click', () => {
+            alert('Mobile menu would open here');
+        });
+
+        // Smooth scrolling for anchor links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function(e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    window.scrollTo({
+                        top: target.offsetTop - 80,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+
+        // Campaign tab filtering (would be implemented fully in a real app)
+        document.querySelectorAll('.campaign-tab').forEach(tab => {
+            tab.addEventListener('click', () => {
+                document.querySelectorAll('.campaign-tab').forEach(t => t.classList.remove('active'));
+                tab.classList.add('active');
+                // In a real app, you would filter campaigns here
+            });
+        });
+
+        // Remove niche chips (dashboard)
+        document.querySelectorAll('.remove-niche').forEach(btn => {
+            btn.addEventListener('click', function() {
+                this.parentElement.remove();
+            });
+        });
+    </script>
+</body>
+</html>
